@@ -49,20 +49,61 @@ public class Main {
 //		System.out.println("Fin: " + repetidosFin);
 
 //		5
-		String[] arrayPalabrasAlfa = {"Abc", "Maxim", "Programación", "C"};
-		LinkedList<String> listaPalabrasAlfa = new LinkedList<String>(Arrays.asList(arrayPalabrasAlfa));
-		ordenarListaPalabras(listaPalabrasAlfa);
-		System.out.println(listaPalabrasAlfa);
-		
+//		String[] arrayPalabrasAlfa = { "Abc", "Maxim", "Programación", "C" };
+//		LinkedList<String> listaPalabrasAlfa = new LinkedList<String>(Arrays.asList(arrayPalabrasAlfa));
+//		ordenarListaPalabras(listaPalabrasAlfa);
+//		System.out.println(listaPalabrasAlfa);
+
 //		6
-		String[] arrayPalabrasTamano = {"Abc", "Maxim", "Programación", "C"};
-		LinkedList<String> listaPalabrasTamano = new LinkedList<String>(Arrays.asList(arrayPalabrasTamano));
-		ordenarListaPalabras2(listaPalabrasTamano);
-		System.out.println(listaPalabrasTamano);
-		
+//		String[] arrayPalabrasTamano = { "Abc", "Maxim", "Programación", "C" };
+//		LinkedList<String> listaPalabrasTamano = new LinkedList<String>(Arrays.asList(arrayPalabrasTamano));
+//		ordenarListaPalabras2(listaPalabrasTamano);
+//		System.out.println(listaPalabrasTamano);
+
 //		7
-		System.out.println(sorteoBonoloto());	
-	
+//		System.out.println(sorteoBonoloto());
+
+//		8
+		LinkedList<Integer> interseccionLista1 = new LinkedList<Integer>();
+		interseccionLista1.add(1);
+		interseccionLista1.add(2);
+		interseccionLista1.add(5);
+
+		LinkedList<Integer> interseccionLista2 = new LinkedList<Integer>();
+		interseccionLista2.add(2);
+		interseccionLista2.add(5);
+		interseccionLista2.add(14);
+		interseccionLista2.add(10);
+
+		LinkedList<Integer> interseccionListaResultado = interseccionListas(interseccionLista1, interseccionLista2);
+		System.out.println(interseccionListaResultado);
+
+//		9
+		LinkedList<Integer> listaOrdenada = new LinkedList<Integer>();
+		listaOrdenada.add(1);
+		listaOrdenada.add(2);
+		listaOrdenada.add(3);
+		listaOrdenada.add(4);
+		listaOrdenada.add(5);
+		listaOrdenada.add(6);
+		listaOrdenada.add(7);
+
+		LinkedList listaDesordenada = desordenarLista(listaOrdenada);
+
+		System.out.println(listaDesordenada);
+
+//		10
+		LinkedList<Double> puntuaciones = new LinkedList<Double>();
+		puntuaciones.add(15.0);
+		puntuaciones.add(20.0);
+		puntuaciones.add(40.0);
+		puntuaciones.add(25.0);
+		puntuaciones.add(5.0);
+		puntuaciones.add(50.0);
+		puntuaciones.add(60.0);
+		double puntuacionFinal = puntuacionesTrampolin(puntuaciones);
+		System.out.println(puntuaciones);
+		System.out.println(puntuacionFinal);
 		input.close();
 
 	}
@@ -108,36 +149,78 @@ public class Main {
 	private static LinkedList<Integer> eliminarRepetidos(LinkedList<Integer> origen) {
 		LinkedList<Integer> resultado = new LinkedList<Integer>();
 		for (int num : origen) {
-			if (resultado.contains(num)) continue;
+			if (resultado.contains(num))
+				continue;
 			resultado.add(num);
 		}
 		return resultado;
 	}
-	
+
 //	5
 	private static void ordenarListaPalabras(LinkedList<String> listaPalabras) {
 		Collections.sort(listaPalabras, Comparators.alfa);
 	}
-	
+
 //	6
 	private static void ordenarListaPalabras2(LinkedList<String> listaPalabras) {
 		Collections.sort(listaPalabras, Comparators.tamano);
 	}
-	
+
 //	7
 	private static LinkedList<Integer> sorteoBonoloto() {
 		LinkedList<Integer> sorteo = new LinkedList<Integer>();
 		LinkedList<Integer> ganadores = new LinkedList<Integer>();
-		
-		for(int i = 0; i < 50; i++) sorteo.add(i);
-		
-		for(int i = 0; i < 6; i++) {
+
+		for (int i = 0; i < 50; i++)
+			sorteo.add(i);
+
+		for (int i = 0; i < 6; i++) {
 			int pos = (int) Math.floor(Math.random() * sorteo.size());
 			ganadores.add(sorteo.get(pos));
 			sorteo.remove(pos);
 		}
-		
+
 		return ganadores;
+	}
+
+//	8
+	private static LinkedList interseccionListas(LinkedList lista1, LinkedList lista2) {
+		LinkedList resultado = new LinkedList();
+		for (Object el : lista1) {
+			if (lista2.contains(el))
+				resultado.add(el);
+		}
+		return resultado;
+	}
+
+//	9
+	private static LinkedList desordenarLista(LinkedList lista) {
+		LinkedList resultado = new LinkedList();
+		int tamanoOrigen = lista.size();
+		for (int i = 0; i < tamanoOrigen; i++) {
+			int pos = (int) Math.floor(Math.random() * lista.size());
+			resultado.add(lista.get(pos));
+			lista.remove(pos);
+		}
+		return resultado;
+	}
+
+//	10
+	private static double puntuacionesTrampolin(LinkedList<Double> puntuaciones) {
+		Collections.sort(puntuaciones);
+
+		puntuaciones.remove(puntuaciones.size() - 1);
+		puntuaciones.remove(puntuaciones.size() - 1);
+		puntuaciones.remove(0);
+		puntuaciones.remove(0);
+
+		double suma = 0;
+
+		for (double puntuacion : puntuaciones) {
+			suma += puntuacion;
+		}
+
+		return suma;
 	}
 
 }
