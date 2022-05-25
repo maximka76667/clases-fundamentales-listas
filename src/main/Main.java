@@ -101,8 +101,8 @@ public class Main {
 			puntuaciones.add(puntuacionesArray[i]);
 		}
 
-		double puntuacionFinal = puntuacionesTrampolin(puntuaciones);
 		System.out.println(puntuaciones);
+		double puntuacionFinal = puntuacionesTrampolin(puntuaciones);
 		System.out.println(puntuacionFinal);
 		input.close();
 
@@ -208,13 +208,14 @@ public class Main {
 //	10
 	private static double puntuacionesTrampolin(LinkedList<Double> puntuaciones) {
 		Collections.sort(puntuaciones);
+		
+		List<Double> puntosRestantes = puntuaciones.subList(2, 5);
 
-		puntuaciones.subList(puntuaciones.size() - 2, puntuaciones.size()).clear();
-		puntuaciones.subList(0, 2).clear();
-
+		System.out.println(puntosRestantes);
+		
 		double suma = 0;
 
-		for (double puntuacion : puntuaciones) {
+		for (double puntuacion : puntosRestantes) {
 			suma += puntuacion;
 		}
 
