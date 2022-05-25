@@ -3,6 +3,7 @@ package main;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -94,13 +95,12 @@ public class Main {
 
 //		10
 		LinkedList<Double> puntuaciones = new LinkedList<Double>();
-		puntuaciones.add(15.0);
-		puntuaciones.add(20.0);
-		puntuaciones.add(40.0);
-		puntuaciones.add(25.0);
-		puntuaciones.add(5.0);
-		puntuaciones.add(50.0);
-		puntuaciones.add(60.0);
+		double[] puntuacionesArray = { 15.0, 20.0, 40.0, 25.0, 5.0, 50.0, 60.0 };
+
+		for (int i = 0; i < puntuacionesArray.length; i++) {
+			puntuaciones.add(puntuacionesArray[i]);
+		}
+
 		double puntuacionFinal = puntuacionesTrampolin(puntuaciones);
 		System.out.println(puntuaciones);
 		System.out.println(puntuacionFinal);
@@ -209,10 +209,8 @@ public class Main {
 	private static double puntuacionesTrampolin(LinkedList<Double> puntuaciones) {
 		Collections.sort(puntuaciones);
 
-		puntuaciones.remove(puntuaciones.size() - 1);
-		puntuaciones.remove(puntuaciones.size() - 1);
-		puntuaciones.remove(0);
-		puntuaciones.remove(0);
+		puntuaciones.subList(puntuaciones.size() - 2, puntuaciones.size()).clear();
+		puntuaciones.subList(0, 2).clear();
 
 		double suma = 0;
 
